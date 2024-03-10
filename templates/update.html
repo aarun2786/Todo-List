@@ -1,0 +1,16 @@
+{% extends 'base.html'%}
+{% block body%}
+<div class="px-5 pt-5 border border-primary border-3 text-center b " style="margin: 100px; background-color: rgb(234, 231, 182);" >
+    <form action="{{url_for('edit_data',id=update_data['_id'])}}" method="post">
+        <div class="input-group mb-3"  >
+            <input type="text" style="background-color: azure;" class="form-control" value="{{update_data['Title']}}" name="Title" >
+        </div>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" value="{{update_data['Todo']}}" name="Todo" style="background-color: azure;" >
+        </div>
+        <div class="input-group mb-3">
+            <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

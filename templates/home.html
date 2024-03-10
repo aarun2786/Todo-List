@@ -1,0 +1,42 @@
+{% extends 'base.html'%}
+{% block body%}
+    <div class="px-5 pt-5 border border-primary border-3 text-center b " style="margin: 100px;max-width: 1500px; background-color: rgb(234, 231, 182);" >
+        <form action="{{url_for('get_data')}}" method="post">
+            <div class="input-group mb-3"  >
+                <input type="text" style="background-color: azure;" class="form-control" placeholder="Enter Title" name="Title" >
+            </div>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Enter the Todo" name="Todo" style="background-color: azure;" >
+            </div>
+            <div class="input-group mb-3">
+                <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+        </div>
+        </form>
+    </div>
+<div class="border-bottom border-3 border-danger" style="max-width: 1500px;" >
+    <h2>Todo List</h2>
+</div>
+<table class="table"style="max-width: 1500px;" >
+    <tr>
+        <th>Title</th>
+        <th>Todos</th>
+        <th>Creatded</th>
+        <th>Action</th>
+    </tr>
+    {% for data in datas %}
+    <tr>
+        <th>{{data['Title']}}</th>
+        {% if data['Edit'] %}
+            <th>{{data['Todo']}} (edited)</th>
+        {% else %}
+        <th>{{data['Todo']}}</th>
+        {% endif %}
+        <th>{{data['Time']}}</th>
+        <th><a href="{{url_for('delete_data',id=data['_id'])}}"><button class="btn btn-danger" >Delete</button></a>   <a href="{{url_for('edit_data',id=data['_id'])}}"><button class="btn btn-warning" >Update</button></a></th>
+    </tr>
+    {% endfor %}
+</table>
+
+
+{% endblock %}
