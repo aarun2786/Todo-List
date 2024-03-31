@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+
+    <div class="container-fluid justify-content-between">
+      <!-- Links -->
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('main.profile')}}">Menu</a>
+        </li>
+        <li class="nav-item mr-auto ">
+          <a class="nav-link" href="{{url_for('auth.logout')}}">Logout</a>
+        </li>
+      </ul>
+    </div>
+  
+  </nav>
+    {% for user in users %}
+        <h5>Name</h5> <h2>{{  user['Name'] }}</h2>
+        <h5>Email</h5><h2>{{  user['Email'] }}</h2>
+    {% endfor %}
+{% endblock %}

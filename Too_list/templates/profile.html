@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+
+  <div class="container-fluid">
+    <!-- Links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="{{url_for('main.profile_view')}}">Profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{url_for('auth.logout')}}">Logout</a>
+      </li>
+    </ul>
+  </div>
+
+</nav>
+{% endblock %}
+{% block body %}
+{% include "message.html" %}
+<br>
+<h1>
+  <div class="px-5">
+      {{ name }}
+  </div>
+</h1>
+<div class="px-4   " >
+  <form action="{{url_for('main.todo')}}"  method="post">
+    <div class="mb- mt-3">
+      <input
+          name="title"
+          placeholder="Enter the Title"
+          class="form-control mb-3">
+    </div>
+    <div>
+      <input
+          name="todo"
+          class="form-control mb-3 "
+          placeholder="Enter the Todo">
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>
+</div>
+<br>
+<div class="border-bottom border-3 border-danger" style="max-width: 1500px;" >
+  <h2>Todo List</h2>
+</div>
+{% if todos %}
+  <table class="table text-center"style="max-width: 1500px;" >
+      <tr>
+          <th>Title</th>
+          <th>Todos</th>
+          <th>Creatded</th>
+          <th>Action</th>
+      </tr>
+      {% for todo in todos  %}
+      <tr>
+          <th>{{todo['Title']}}</th>
+          {% if todo['Edit'] %}
+              <th>{{todo['Todo']}} (edited)</th>
+          {% else %}
+          <th>{{todo['Todo']}}</th>
+          {% endif %}
+          <th>{{todo['Time']}}</th>
+          <th><a href="{{url_for('user_todo.delete',userid=todo['_id'])}}"><button class="btn btn-danger" >Delete</button></a>   <a href="{{url_for('user_todo.update',userid=todo['_id'])}}"><button class="btn btn-warning" >Update</button></a></th>
+      </tr>
+      {% endfor %}
+  </table>
+{% else %}
+  No data is Creatded
+{% endif %}
+{% endblock %}
